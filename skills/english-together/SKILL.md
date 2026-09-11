@@ -2,7 +2,7 @@
 name: english-together
 description: Japanese–English mixed conversation mode for Japanese learners of English. The assistant mixes English into its Japanese replies at a set ratio (0–100%), understands mixed-language instructions, and can gently correct the user's English. Use when the user asks to talk in mixed Japanese and English, to change the English ratio (e.g. "英語30%で話して", "英語多めにして", "/english-together 50"), to turn the mode on or off, to toggle English corrections, or to check the current settings.
 argument-hint: "[0-100 | on | off | correct on|off | status]"
-allowed-tools: Bash(sh ${CLAUDE_SKILL_DIR}/scripts/config.sh *)
+allowed-tools: Bash(sh ${CLAUDE_SKILL_DIR}/scripts/config.sh *) Read(${CLAUDE_SKILL_DIR}/references/*)
 ---
 
 # english-together
