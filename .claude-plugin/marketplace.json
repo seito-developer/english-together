@@ -1,0 +1,17 @@
+{
+  "name": "english-together",
+  "description": "english-together: a Japanese-English mixed conversation plugin for Japanese learners of English.",
+  "owner": {
+    "name": "Seito Horiguchi",
+    "url": "https://github.com/seito-developer"
+  },
+  "plugins": [
+    {
+      "name": "english-together",
+      "source": "./",
+      "description": "Mix English into your Japanese AI conversations at a comfortable ratio (0-100%), with gentle English tips.",
+      "version": "0.1.0",
+      "category": "learning"
+    }
+  ]
+}
