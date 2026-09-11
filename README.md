@@ -13,8 +13,6 @@ AI との対話を「日本語と英語のちゃんぽん」にして、英語�
 - **さりげない添削**：あなたの英語に不自然なところがあれば、応答の最後に 💡 English tip を1〜2行で添えます（OFF にもできます）
 - **大事なところは混ぜない**：コード、コマンド、コミットメッセージ、生成したドキュメント、重要な警告は、ミックスせずに通常どおり書きます
 
-Chrome 拡張 [Mazelingo](https://chromewebstore.google.com/detail/mazelingo/bhdngeocokoeblnnlhjibojcadefimpi) の「日英を混ぜて読む」というアイデアを、Web ページではなく **AI との対話（CLI・IDE）** に持ち込んだものです。
-
 ## 例
 
 質問：「HTTP の GET と POST の違いを教えて」

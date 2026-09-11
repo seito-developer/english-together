@@ -13,8 +13,6 @@ Talking to an AI in 100% English is tiring, and most learners give up. With engl
 - **Gentle corrections**: if your English is clearly unnatural, the reply ends with a one- or two-line 💡 English tip. You can turn this off.
 - **Safe where it matters**: code, commands, commit messages, generated documents and critical warnings are never mixed.
 
-Inspired by the Chrome extension [Mazelingo](https://chromewebstore.google.com/detail/mazelingo/bhdngeocokoeblnnlhjibojcadefimpi), which mixes Japanese and English on web pages. english-together brings the same idea to **conversations with AI in the CLI or IDE**.
-
 ## Examples
 
 Question: 「HTTP の GET と POST の違いを教えて」 ("What's the difference between GET and POST?")
