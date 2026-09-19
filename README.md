@@ -34,14 +34,31 @@ AI との対話を「日本語と英語のちゃんぽん」にして、英語�
 
 ### Claude Code（推奨）
 
-Claude Code の中で次のコマンドを実行します。
+Claude Code を開き、入力欄に次のコマンドを1つずつ入力して Enter を押します。
+
+**手順 1：配布元を登録する**
 
 ```
 /plugin marketplace add seito-developer/english-together
+```
+
+english-together の配布元（GitHub 上のこのリポジトリ）を Claude Code に登録します。アプリストアを追加するようなものです。
+
+**手順 2：インストールする**
+
+```
 /plugin install english-together@english-together
 ```
 
-インストール直後は OFF になっています。`/english-together` で有効にしてください。
+登録した配布元から english-together をインストールします。`@` の前はプラグイン名、後ろは配布元の名前です（どちらも english-together です）。
+
+**手順 3：有効にする**
+
+```
+/english-together
+```
+
+インストール直後は OFF になっているので、このコマンドで ON にします。
 
 ### 他のエージェント（Codex CLI、Cursor、GitHub Copilot など）
 
