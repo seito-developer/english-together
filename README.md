@@ -48,9 +48,21 @@ https://github.com/user-attachments/assets/bdc3ffd4-977a-46ce-a4cc-a149e864c392
 💡 English tip: "Please explain me about what is the docker compose" → "Please explain to me what Docker Compose is."（explain は「explain to 人」の形になります）
 ```
 
-## インストール
+## インストール方法（3つあります）
 
-### Claude Code（推奨）
+入るスキルの中身はどれも同じです。違うのは **どのエージェントに入るか** と、**フックが付くかどうか** の2点です。
+
+| | 方法 | 対応するエージェント | フック |
+|---|---|---|---|
+| **方法1** | Claude Code のプラグインとして入れる | Claude Code | あり |
+| **方法2** | skills CLI で入れる | Codex CLI、Cursor、GitHub Copilot など、Agent Skills に対応したエージェント | なし |
+| **方法3** | 手動でコピーする | 同上 | なし |
+
+フックが無い場合、**比率が自動で上がる機能だけ**が働きません（セッションの開始時に数える仕組みのため）。下げる方も、手動での変更も、混ぜ方そのものも同じように使えます。
+
+Claude Code で使うなら **方法1** をおすすめします。
+
+### 方法1：Claude Code のプラグインとして入れる
 
 Claude Code を開き、入力欄に次のコマンドを1つずつ入力して Enter を押します。
 
@@ -78,7 +90,7 @@ english-together の配布元（GitHub 上のこのリポジトリ）を Claude 
 
 インストール直後は OFF になっているので、このコマンドで ON にします。
 
-### 他のエージェント（Codex CLI、Cursor、GitHub Copilot など）
+### 方法2：skills CLI で入れる（Claude Code 以外のエージェント）
 
 [skills CLI](https://github.com/vercel-labs/skills) を使うと、Agent Skills に対応した各種エージェントにインストールできます。
 
@@ -86,9 +98,22 @@ english-together の配布元（GitHub 上のこのリポジトリ）を Claude 
 npx skills add seito-developer/english-together
 ```
 
-手動で入れる場合は、`skills/english-together/` ディレクトリを、使っているエージェントのスキル用ディレクトリ（例：`~/.agents/skills/`）にコピーしてください。
+対話形式で、どのエージェントに入れるかを選べます。
 
-Claude Code 以外ではフックが使えないため、会話ごとに「english-together で英語30%で話して」のように呼び出してください。毎回呼び出さずに常に有効にしたい場合は、[AGENTS.md 用の文面](docs/agents-md-snippet.md) をプロジェクトまたはユーザーの AGENTS.md に追記してください。
+### 方法3：手動でコピーする
+
+リポジトリを取得して、`skills/english-together/` を、使っているエージェントのスキル用ディレクトリにコピーします。
+
+```sh
+git clone https://github.com/seito-developer/english-together.git
+cp -r english-together/skills/english-together ~/.agents/skills/
+```
+
+置き場所はエージェントによって変わります（例：`~/.agents/skills/`、`~/.claude/skills/`、プロジェクト直下の `.agents/skills/`）。
+
+### 方法2・方法3のあとに
+
+フックが無いため、会話ごとに「english-together で英語30%で話して」のように呼び出してください。毎回呼び出さずに常に有効にしたい場合は、[AGENTS.md 用の文面](docs/agents-md-snippet.md) をプロジェクトまたはユーザーの AGENTS.md に追記してください。
 
 ## 使い方
 
@@ -179,9 +204,13 @@ Claude Code では、セッションの開始時と compaction（コンテキス
 
 ## アンインストール
 
+方法1（プラグイン）で入れた場合：
+
 ```
 /plugin uninstall english-together@english-together
 ```
+
+方法2（skills CLI）で入れた場合は `npx skills remove english-together`、方法3（手動コピー）で入れた場合はコピーしたディレクトリを削除してください。
 
 設定ファイルも消す場合は、`~/.config/english-together/` を削除してください。
 

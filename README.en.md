@@ -48,9 +48,21 @@ A correction:
 💡 English tip: "Please explain me about what is the docker compose" → "Please explain to me what Docker Compose is."（explain は「explain to 人」の形になります）
 ```
 
-## Installation
+## Installation (three ways)
 
-### Claude Code (recommended)
+The skill itself is the same in all three. What differs is **which agents it lands in** and **whether the hooks come with it**.
+
+| | Method | Agents | Hooks |
+|---|---|---|---|
+| **Method 1** | Install as a Claude Code plugin | Claude Code | Yes |
+| **Method 2** | Install with the skills CLI | Codex CLI, Cursor, GitHub Copilot and other agents that support Agent Skills | No |
+| **Method 3** | Copy the files by hand | Same as above | No |
+
+Without the hooks, **only the automatic increase of the ratio** is missing, because it counts sessions at startup. Lowering the ratio, changing it by hand, and the mixing itself all work the same.
+
+If you are on Claude Code, **method 1** is the one to use.
+
+### Method 1: install as a Claude Code plugin
 
 Open Claude Code, then type each command below into the input box and press Enter.
 
@@ -78,17 +90,30 @@ This installs english-together from the source you just added. The part before `
 
 The mode is OFF after installation, so this command turns it on.
 
-### Other agents (Codex CLI, Cursor, GitHub Copilot, and more)
+### Method 2: install with the skills CLI (agents other than Claude Code)
 
-Use the [skills CLI](https://github.com/vercel-labs/skills) to install into any agent that supports Agent Skills:
+The [skills CLI](https://github.com/vercel-labs/skills) installs into any agent that supports Agent Skills:
 
 ```sh
 npx skills add seito-developer/english-together
 ```
 
-To install by hand, copy `skills/english-together/` into your agent's skills directory (for example `~/.agents/skills/`).
+It asks which agents to install into.
 
-Hooks are specific to Claude Code, so in other agents you invoke the skill in each conversation (for example 「english-together で英語30%で話して」). To keep the mode on without invoking it every time, add the [AGENTS.md snippet](docs/agents-md-snippet.md) to your project or user AGENTS.md.
+### Method 3: copy the files by hand
+
+Get the repository and copy `skills/english-together/` into your agent's skills directory:
+
+```sh
+git clone https://github.com/seito-developer/english-together.git
+cp -r english-together/skills/english-together ~/.agents/skills/
+```
+
+The directory differs per agent — `~/.agents/skills/`, `~/.claude/skills/`, or `.agents/skills/` inside a project.
+
+### After method 2 or 3
+
+There are no hooks, so invoke the skill in each conversation (for example "english-together, 30% Japanese please"). To keep the mode on without invoking it every time, add the [AGENTS.md snippet](docs/agents-md-snippet.md) to your project or user AGENTS.md.
 
 ## Usage
 
@@ -179,9 +204,13 @@ Raising the ratio is decided by the hook, which only counts sessions at startup.
 
 ## Uninstall
 
+If you used method 1 (the plugin):
+
 ```
 /plugin uninstall english-together@english-together
 ```
+
+For method 2 (the skills CLI), run `npx skills remove english-together`. For method 3, delete the directory you copied.
 
 To remove your settings as well, delete `~/.config/english-together/`.
 
