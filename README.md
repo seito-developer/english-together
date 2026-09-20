@@ -1,7 +1,5 @@
 # english-together
 
-https://github.com/user-attachments/assets/bdc3ffd4-977a-46ce-a4cc-a149e864c392
-
 You can see the README in English here.  
 [English README](README.en.md)
 
@@ -18,6 +16,8 @@ You can see the README in English here.
 あるいは3:7で日本語・英語を使うなら？
 
 それだったら続けられるんじゃないか...そんなアイデアからこのスキルは生まれました。
+
+https://github.com/user-attachments/assets/bdc3ffd4-977a-46ce-a4cc-a149e864c392
 
 つまりこれは、AIとの対話において、「日本語と英語を混ぜて行うこと」ことで、英語学習の認知負荷を下げる **Claude Code プラグイン／Agent Skill** です。
 スキル名の「English Together」は、日本語と英語をごちゃまぜで話すのが芸風の日本のタレント「ルー大柴さん」の代名詞「トゥギャザーしようぜ！」からインスパイアされています。
