@@ -17,8 +17,10 @@ Or 30:70 between your own language and the one you are learning?
 
 That you could keep up — and that idea is where this skill came from.
 
-So this is a **Claude Code plugin / Agent Skill** that lowers the cognitive load of language learning by **mixing the two languages together** in your conversations with AI.
+This is a **plugin / Agent Skill for AI agents** that lowers the cognitive load of language learning by **mixing the two languages together** in your conversations with AI. (It works with Claude Code and Codex.)
 The name "English Together" is inspired by 「トゥギャザーしようぜ！」 ("Let's together!"), the catchphrase of Lou Oshiba, a Japanese TV personality known for mixing English into Japanese.
+
+https://github.com/user-attachments/assets/bdc3ffd4-977a-46ce-a4cc-a149e864c392
 
 Talking to an AI in 100% English is tiring, and most learners give up. With english-together, the AI's replies contain **English at the ratio you choose (0–100%)**. You pick up English steadily while you code, debug and research as usual.
 
@@ -105,6 +107,17 @@ You can also just ask in plain language: "more Japanese please", "say that in En
 
 > If another plugin uses the same command name, use the full name `/english-together:english-together`.
 
+## Adaptive ratio
+
+It is hard to judge your own level, so english-together moves the ratio for you (on by default).
+
+- **It goes down** by 10% only when you say so — "say that in English", "I don't understand", 「日本語で言って」. The reply is redone at the lower ratio, and one short line tells you where it is now.
+- **It goes up** by 10% when three sessions in a row pass without a single request to lower it. The change happens when you next start Claude Code, never in the middle of a conversation.
+- Asking "what does X mean?" is a learning question, so it does not lower the ratio. Say it plainly when you want it lowered.
+- To take full control, run `/english-together adaptive off`.
+
+Hooks are specific to Claude Code, so **the automatic increase does not happen in other agents**. Lowering and manual changes work everywhere.
+
 ## Two directions
 
 `direction` decides which language you are learning. `ratio` always means the share of **the language you are learning**.
@@ -124,17 +137,6 @@ A reply at 30% Japanese:
 > A **reverse proxy** is a サーバー (sābā — server) that sits **in front of** your real servers.
 
 The Japanese script is the hardest part at the start, so up to 30% every Japanese word gets romaji and its English meaning the first time it appears in a reply. Above 40%, only the less common words are glossed. Corrections follow the direction too: in `en2ja` your Japanese gets a 💡 日本語 tip.
-
-## Adaptive ratio
-
-It is hard to judge your own level, so english-together moves the ratio for you (on by default).
-
-- **It goes down** by 10% only when you say so — "say that in English", "I don't understand", 「日本語で言って」. The reply is redone at the lower ratio, and one short line tells you where it is now.
-- **It goes up** by 10% when three sessions in a row pass without a single request to lower it. The change happens when you next start Claude Code, never in the middle of a conversation.
-- Asking "what does X mean?" is a learning question, so it does not lower the ratio. Say it plainly when you want it lowered.
-- To take full control, run `/english-together adaptive off`.
-
-Hooks are specific to Claude Code, so **the automatic increase does not happen in other agents**. Lowering and manual changes work everywhere.
 
 ## Settings
 
@@ -190,12 +192,6 @@ sh tests/test_config.sh && sh tests/test_inject.sh   # unit tests
 claude plugin validate . --strict                    # validate manifests
 claude --plugin-dir .                                # try it locally
 ```
-
-See the [design spec (Japanese)](docs/superpowers/specs/2026-09-11-english-together-design.md) for details.
-
-## About the name
-
-The name comes from 「トゥギャザーしようぜ！」 ("Let's together!"), a catchphrase of the Japanese comedian Lou Oshiba, famous for mixing English into Japanese. This project turns that style into a learning tool.
 
 ## License
 
