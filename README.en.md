@@ -20,7 +20,7 @@ That you could keep up — and that idea is where this skill came from.
 This is a **plugin / Agent Skill for AI agents** that lowers the cognitive load of language learning by **mixing the two languages together** in your conversations with AI. (It works with Claude Code and Codex.)
 The name "English Together" is inspired by 「トゥギャザーしようぜ！」 ("Let's together!"), the catchphrase of Lou Oshiba, a Japanese TV personality known for mixing English into Japanese.
 
-https://github.com/user-attachments/assets/bdc3ffd4-977a-46ce-a4cc-a149e864c392
+<img width="100%" height="auto" alt="demo" src="https://github.com/user-attachments/assets/66c90e6c-1a8d-409b-8720-97f2221ab496" />
 
 Talking to an AI in 100% English is tiring, and most learners give up. With english-together, the AI's replies contain **English at the ratio you choose (0–100%)**. You pick up English steadily while you code, debug and research as usual.
 
