@@ -1,5 +1,7 @@
 # english-together
 
+https://github.com/user-attachments/assets/bdc3ffd4-977a-46ce-a4cc-a149e864c392
+
 You can see the README in English here.  
 [English README](README.en.md)
 
