@@ -13,8 +13,6 @@ Talking to an AI in 100% English is tiring, and most learners give up. With engl
 - **Gentle corrections**: if your English is clearly unnatural, the reply ends with a one- or two-line 💡 English tip. You can turn this off.
 - **Safe where it matters**: code, commands, commit messages, generated documents and critical warnings are never mixed.
 
-Inspired by the Chrome extension [Mazelingo](https://chromewebstore.google.com/detail/mazelingo/bhdngeocokoeblnnlhjibojcadefimpi), which mixes Japanese and English on web pages. english-together brings the same idea to **conversations with AI in the CLI or IDE**.
-
 ## Examples
 
 Question: 「HTTP の GET と POST の違いを教えて」 ("What's the difference between GET and POST?")
@@ -36,14 +34,31 @@ A correction:
 
 ### Claude Code (recommended)
 
-Run these commands inside Claude Code:
+Open Claude Code, then type each command below into the input box and press Enter.
+
+**Step 1: Add the source**
 
 ```
 /plugin marketplace add seito-developer/english-together
+```
+
+This registers the source of english-together (this GitHub repository) with Claude Code. Think of it as adding an app store.
+
+**Step 2: Install the plugin**
+
+```
 /plugin install english-together@english-together
 ```
 
-The mode is OFF after installation. Turn it on with `/english-together`.
+This installs english-together from the source you just added. The part before `@` is the plugin name, and the part after it is the source name. Both are english-together.
+
+**Step 3: Turn it on**
+
+```
+/english-together
+```
+
+The mode is OFF after installation, so this command turns it on.
 
 ### Other agents (Codex CLI, Cursor, GitHub Copilot, and more)
 
