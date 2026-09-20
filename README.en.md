@@ -1,10 +1,24 @@
 # english-together
 
-> "Let's together!"
-
-A **Claude Code plugin / Agent Skill** that mixes English into your Japanese conversations with AI, so Japanese learners of English can practice without burning out.
-
+You can see the README in Japanese here.  
 [日本語の README](README.md)
+
+"If I did all my AI conversations in English, that would be English practice, wouldn't it?"
+
+Have you ever decided to switch your conversations with AI over to English?
+
+But once you actually try it:
+"Reading 100% English is hard work."
+"Putting everything I want to say into English takes time, and it wears me out."
+Two or three days later, you are back where you started.
+
+So what about half and half?
+Or 30:70 between your own language and the one you are learning?
+
+That you could keep up — and that idea is where this skill came from.
+
+So this is a **Claude Code plugin / Agent Skill** that lowers the cognitive load of language learning by **mixing the two languages together** in your conversations with AI.
+The name "English Together" is inspired by 「トゥギャザーしようぜ！」 ("Let's together!"), the catchphrase of Lou Oshiba, a Japanese TV personality known for mixing English into Japanese.
 
 Talking to an AI in 100% English is tiring, and most learners give up. With english-together, the AI's replies contain **English at the ratio you choose (0–100%)**. You pick up English steadily while you code, debug and research as usual.
 
