@@ -51,7 +51,7 @@ When the user's message contains **learning-language** text that is clearly wron
 
 - Label the tip for the learning language, and write the explanation in the **base language**.
 - At most two tips per reply. Pick the most useful ones.
-- Skip the tip when the text is already natural, when the user wrote nothing in the learning language, or when the difference is only a matter of style.
+- Skip the tip when the text is already natural, when the user wrote nothing in the learning language, or when the difference is only a matter of style. Skipping means writing no tip line at all — never write a tip that says there is nothing to correct.
 - Never correct code, identifiers, commands, quoted text or proper nouns.
 - Do the task first. The tip must never replace or delay the answer.
 
@@ -61,11 +61,13 @@ When `correction=off`, interpret the user's writing silently and never add tips.
 
 The ratio follows the user instead of waiting for them to tune it.
 
-**Lowering it.** When the user explicitly says the mix was too hard — for example 「日本語で言って」「もう一回」「意味が分からない」, "in English please", "say that again", "I don't understand" — run:
+**Lowering it.** When the user explicitly says the mix was too hard — for example 「日本語で言って」「もう一回」「意味が分からない」, "in English please", "say that again", "I don't understand" — run `config.sh adapt down`, using the exact script path given with the settings:
 
 ```
-sh <skill directory>/scripts/config.sh adapt down
+sh /path/from/the/settings/message/config.sh adapt down
 ```
+
+Never edit the settings file yourself: writing it by hand drops the settings this script maintains.
 
 Then answer at the new, lower ratio in the same reply, and add one short line in the base language saying what the ratio is now. Do this at most once per message. Only an explicit request counts: a question about what a word means is curiosity, not a complaint, so answer it and keep the ratio where it is. Never lower the ratio on your own for any other reason.
 

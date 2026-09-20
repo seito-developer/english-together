@@ -33,6 +33,7 @@ assert_contains "$session_out" "ratio: 30%" "session: ratio"
 assert_contains "$session_out" "correction: off" "session: correction"
 assert_contains "$session_out" "direction: ja2en" "session: direction"
 assert_contains "$session_out" "## 3. Never mix these" "session: includes the core rules"
+assert_contains "$session_out" "$CONFIG_SH" "session: gives the real path of the settings script"
 assert_contains "$session_out" "Level table: ja2en" "session: includes the ja2en levels"
 case "$session_out" in
   *"Level table: en2ja"*) assert_eq "absent" "present" "session: must not include the other direction" ;;

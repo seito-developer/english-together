@@ -11,6 +11,8 @@ Talking to an AI in 100% English is tiring, and most learners give up. With engl
 - **Mixed replies**: set the English ratio in steps of 10%. Low ratios swap in English words; higher ratios move to phrases and then whole sentences.
 - **Mixed input**: instructions such as 「この function の bug を fix して」 are understood as-is.
 - **Gentle corrections**: if your English is clearly unnatural, the reply ends with a one- or two-line 💡 English tip. You can turn this off.
+- **Adaptive ratio**: say "in English please" and it goes down; keep going smoothly and it creeps up. You can turn this off.
+- **Both directions**: English speakers learning Japanese can flip it around with `direction en2ja` and get Japanese mixed into English replies.
 - **Safe where it matters**: code, commands, commit messages, generated documents and critical warnings are never mixed.
 
 ## Examples
@@ -81,20 +83,56 @@ Hooks are specific to Claude Code, so in other agents you invoke the skill in ea
 | `/english-together off` | Turn the mode off |
 | `/english-together on` | Turn the mode on |
 | `/english-together correct off` | Stop corrections (`correct on` resumes them) |
+| `/english-together adaptive off` | Stop adjusting the ratio automatically (`adaptive on` resumes it) |
+| `/english-together direction en2ja` | Switch direction (`ja2en` switches back; see "Two directions" below) |
 | `/english-together status` | Show the current settings |
 
-You can also just ask in plain language: 「英語30%で話して」 (30% English), 「英語多めにして」 (more English), 「添削はいらない」 (no corrections).
+You can also just ask in plain language: "more Japanese please", "say that in English", 「英語30%で話して」, 「添削はいらない」.
 
 > If another plugin uses the same command name, use the full name `/english-together:english-together`.
+
+## Two directions
+
+`direction` decides which language you are learning. `ratio` always means the share of **the language you are learning**.
+
+| Setting | Who it is for | Base of the reply | Language mixed in |
+|---|---|---|---|
+| `ja2en` (default) | Japanese speakers learning English | Japanese | English |
+| `en2ja` | English speakers learning Japanese | English | Japanese |
+
+```
+/english-together direction en2ja
+/english-together 30
+```
+
+A reply at 30% Japanese:
+
+> A **reverse proxy** is a サーバー (sābā — server) that sits **in front of** your real servers.
+
+The Japanese script is the hardest part at the start, so up to 30% every Japanese word gets romaji and its English meaning the first time it appears in a reply. Above 40%, only the less common words are glossed. Corrections follow the direction too: in `en2ja` your Japanese gets a 💡 日本語 tip.
+
+## Adaptive ratio
+
+It is hard to judge your own level, so english-together moves the ratio for you (on by default).
+
+- **It goes down** by 10% only when you say so — "say that in English", "I don't understand", 「日本語で言って」. The reply is redone at the lower ratio, and one short line tells you where it is now.
+- **It goes up** by 10% when three sessions in a row pass without a single request to lower it. The change happens when you next start Claude Code, never in the middle of a conversation.
+- Asking "what does X mean?" is a learning question, so it does not lower the ratio. Say it plainly when you want it lowered.
+- To take full control, run `/english-together adaptive off`.
+
+Hooks are specific to Claude Code, so **the automatic increase does not happen in other agents**. Lowering and manual changes work everywhere.
 
 ## Settings
 
 Settings are saved to `~/.config/english-together/config` and persist across sessions. All agents share this file.
 
 ```
-enabled=false     # true keeps the mode on in every conversation
-ratio=20          # English ratio (0-100, steps of 10)
-correction=on     # corrections (on / off)
+enabled=false       # true keeps the mode on in every conversation
+ratio=20            # share of the language you are learning (0-100, steps of 10)
+correction=on       # corrections (on / off)
+direction=ja2en     # ja2en: learning English / en2ja: learning Japanese
+adaptive=on         # automatic ratio adjustment (on / off)
+smooth_sessions=0   # internal counter for the adaptive ratio (do not edit)
 ```
 
 Set the `ENGLISH_TOGETHER_CONFIG` environment variable to use a different path.
@@ -109,15 +147,19 @@ Set the `ENGLISH_TOGETHER_CONFIG` environment variable to use a different path.
 
 ```
 skills/english-together/
-├── SKILL.md              # commands and how to change settings
-├── references/rules.md   # mixing rules (definition and examples per ratio)
-└── scripts/config.sh     # reads and writes the settings file (POSIX sh)
+├── SKILL.md                        # commands and how to change settings
+├── references/rules-core.md        # rules shared by both directions
+├── references/levels-ja2en.md      # level table for learning English
+├── references/levels-en2ja.md      # level table for learning Japanese
+└── scripts/config.sh               # reads and writes the settings file (POSIX sh)
 hooks/
-├── hooks.json            # SessionStart / UserPromptSubmit hooks
-└── inject.sh             # injects rules and settings only when ON
+├── hooks.json                      # SessionStart / UserPromptSubmit hooks
+└── inject.sh                       # injects rules and settings only when ON
 ```
 
-In Claude Code, the rules are injected at session start and again after compaction, and every message gets a one-line reminder. This keeps the ratio stable in long conversations. When the mode is off, nothing is injected and no tokens are spent.
+In Claude Code, the rules are injected at session start and again after compaction, and every message gets a one-line reminder. This keeps the ratio stable in long conversations. Only the core rules and the level table for the direction in use are injected. When the mode is off, nothing is injected and no tokens are spent.
+
+Raising the ratio is decided by the hook, which only counts sessions at startup. Lowering is decided by the model, but every write goes through `config.sh`, so the settings file cannot be damaged.
 
 ## Uninstall
 

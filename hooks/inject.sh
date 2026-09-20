@@ -41,7 +41,8 @@ case "$1" in
     if [ -n "$raised" ]; then
       printf 'The last few sessions went smoothly, so the ratio just went up to %s%%. Mention this in one short line in your first reply.\n' "$ratio"
     fi
-    printf 'Follow the rules below in every reply. The user can change this with /english-together <0-100|on|off|correct on|off|direction ja2en|en2ja|adaptive on|off|status>.\n\n'
+    printf 'Follow the rules below in every reply. The user can change this with /english-together <0-100|on|off|correct on|off|direction ja2en|en2ja|adaptive on|off|status>.\n'
+    printf 'Change the settings only by running this script, never by editing the settings file:\n  sh %s <show|set <key> <value>|adapt down>\n\n' "$CONFIG_SH"
     cat "$SKILL_DIR/references/rules-core.md" 2>/dev/null
     printf '\n'
     cat "$SKILL_DIR/references/levels-$direction.md" 2>/dev/null
