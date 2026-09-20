@@ -151,12 +151,6 @@ claude plugin validate . --strict                    # マニフェストの検�
 claude --plugin-dir .                                # ローカルで試す
 ```
 
-設計の詳細は [設計スペック](docs/superpowers/specs/2026-09-11-english-together-design.md) を参照してください。
-
-## 名前の由来
-
-ルー大柴さんの「トゥギャザーしようぜ！」から。日本語と英語を混ぜて話すスタイルを、学習の味方にしようというプロジェクトです。
-
 ## ライセンス
 
 [MIT](LICENSE)
