@@ -1,10 +1,26 @@
 # english-together
 
-> トゥギャザーしようぜ！
-
-AI との対話を「日本語と英語のちゃんぽん」にして、英語学習の認知負荷を下げる **Claude Code プラグイン／Agent Skill** です。
-
+You can see the README in English here.  
 [English README](README.en.md)
+
+「AIとの会話を普段から英語で行うようにすれば英語学習になるのでは？」
+
+そう思って、AIとの会話を英語でやってみよう！と思ったことはないでしょうか？
+
+だけど実際にやってみると、
+「１００％英語でのやり取りだと読むのがしんどい」
+「全部英語化するのは時間がかかって疲れる」
+そんな状態に、2、3日で陥ります。
+
+では5:5くらいなら？
+あるいは3:7で日本語・英語を使うなら？
+
+それだったら続けられるんじゃないか...そんなアイデアからこのスキルは生まれました。
+
+これは、AIとの対話において、「日本語と英語を混ぜて行うこと」ことで英語学習の認知負荷を下げる **AIエージェント向けプラグイン／Agent Skill** です。（Claude CodeやCodexに対応）
+スキル名の「English Together」は、日本語と英語をごちゃまぜで話すのが芸風の日本のタレント「ルー大柴さん」の代名詞「トゥギャザーしようぜ！」からインスパイアされています。
+
+https://github.com/user-attachments/assets/bdc3ffd4-977a-46ce-a4cc-a149e864c392
 
 100% 英語で AI とやり取りするのは、疲れて続きません。english-together を使うと、AI の応答に **設定した割合（0〜100%）の英語** が混ざります。普段の開発や調べものをしながら、無理なく英語に触れ続けられます。
 
@@ -32,9 +48,21 @@ AI との対話を「日本語と英語のちゃんぽん」にして、英語�
 💡 English tip: "Please explain me about what is the docker compose" → "Please explain to me what Docker Compose is."（explain は「explain to 人」の形になります）
 ```
 
-## インストール
+## インストール方法（3つあります）
 
-### Claude Code（推奨）
+入るスキルの中身はどれも同じです。違うのは **どのエージェントに入るか** と、**フックが付くかどうか** の2点です。
+
+| | 方法 | 対応するエージェント | フック |
+|---|---|---|---|
+| **方法1** | Claude Code のプラグインとして入れる | Claude Code | あり |
+| **方法2** | skills CLI で入れる | Codex CLI、Cursor、GitHub Copilot など、Agent Skills に対応したエージェント | なし |
+| **方法3** | 手動でコピーする | 同上 | なし |
+
+フックが無い場合、**比率が自動で上がる機能だけ**が働きません（セッションの開始時に数える仕組みのため）。下げる方も、手動での変更も、混ぜ方そのものも同じように使えます。
+
+Claude Code で使うなら **方法1** をおすすめします。
+
+### 方法1：Claude Code のプラグインとして入れる
 
 Claude Code を開き、入力欄に次のコマンドを1つずつ入力して Enter を押します。
 
@@ -62,7 +90,7 @@ english-together の配布元（GitHub 上のこのリポジトリ）を Claude 
 
 インストール直後は OFF になっているので、このコマンドで ON にします。
 
-### 他のエージェント（Codex CLI、Cursor、GitHub Copilot など）
+### 方法2：skills CLI で入れる（Claude Code 以外のエージェント）
 
 [skills CLI](https://github.com/vercel-labs/skills) を使うと、Agent Skills に対応した各種エージェントにインストールできます。
 
@@ -70,9 +98,22 @@ english-together の配布元（GitHub 上のこのリポジトリ）を Claude 
 npx skills add seito-developer/english-together
 ```
 
-手動で入れる場合は、`skills/english-together/` ディレクトリを、使っているエージェントのスキル用ディレクトリ（例：`~/.agents/skills/`）にコピーしてください。
+対話形式で、どのエージェントに入れるかを選べます。
 
-Claude Code 以外ではフックが使えないため、会話ごとに「english-together で英語30%で話して」のように呼び出してください。毎回呼び出さずに常に有効にしたい場合は、[AGENTS.md 用の文面](docs/agents-md-snippet.md) をプロジェクトまたはユーザーの AGENTS.md に追記してください。
+### 方法3：手動でコピーする
+
+リポジトリを取得して、`skills/english-together/` を、使っているエージェントのスキル用ディレクトリにコピーします。
+
+```sh
+git clone https://github.com/seito-developer/english-together.git
+cp -r english-together/skills/english-together ~/.agents/skills/
+```
+
+置き場所はエージェントによって変わります（例：`~/.agents/skills/`、`~/.claude/skills/`、プロジェクト直下の `.agents/skills/`）。
+
+### 方法2・方法3のあとに
+
+フックが無いため、会話ごとに「english-together で英語30%で話して」のように呼び出してください。毎回呼び出さずに常に有効にしたい場合は、[AGENTS.md 用の文面](docs/agents-md-snippet.md) をプロジェクトまたはユーザーの AGENTS.md に追記してください。
 
 ## 使い方
 
@@ -163,9 +204,13 @@ Claude Code では、セッションの開始時と compaction（コンテキス
 
 ## アンインストール
 
+方法1（プラグイン）で入れた場合：
+
 ```
 /plugin uninstall english-together@english-together
 ```
+
+方法2（skills CLI）で入れた場合は `npx skills remove english-together`、方法3（手動コピー）で入れた場合はコピーしたディレクトリを削除してください。
 
 設定ファイルも消す場合は、`~/.config/english-together/` を削除してください。
 
@@ -176,12 +221,6 @@ sh tests/test_config.sh && sh tests/test_inject.sh   # 単体テスト
 claude plugin validate . --strict                    # マニフェストの検証
 claude --plugin-dir .                                # ローカルで試す
 ```
-
-設計の詳細は [設計スペック](docs/superpowers/specs/2026-09-11-english-together-design.md) を参照してください。
-
-## 名前の由来
-
-ルー大柴さんの「トゥギャザーしようぜ！」から。日本語と英語を混ぜて話すスタイルを、学習の味方にしようというプロジェクトです。
 
 ## ライセンス
 
